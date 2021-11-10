@@ -42,7 +42,7 @@ export const savePost = (postObj) => {
     return fetch(`${API}/posts`, fetchOptions)
         .then(response => response.json())
         .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
 export const saveMessage = (messageObj) => {
@@ -56,7 +56,7 @@ export const saveMessage = (messageObj) => {
     return fetch(`${API}/messages`, fetchOptions)
         .then(response => response.json())
         .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
 export const saveLike = (likeObj) => {
@@ -70,7 +70,7 @@ export const saveLike = (likeObj) => {
     return fetch(`${API}/likes`, fetchOptions)
         .then(response => response.json())
         .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
 export const deletePost = (id) => {

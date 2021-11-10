@@ -1,6 +1,5 @@
 import { getUsers } from "../data/provider.js"
-
-import { registerUser } from "./register.js"
+import { registerUser } from "./Register.js"
 
 
 document.addEventListener("click", clickEvent => {
