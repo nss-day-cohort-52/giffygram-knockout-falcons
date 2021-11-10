@@ -1,4 +1,5 @@
-import { getUsers } from "../data/provider.js"
+import { getCurrentUser, getUsers } from "../data/provider.js"
+import { PostForm } from "../feed/PostForm.js"
 
 
 document.addEventListener("click", clickEvent => {
@@ -37,5 +38,6 @@ export const LoginForm = () => {
             </form>
             <button id="loginButton">Login</button>
         </div>
+        ${PostForm()}
     `
 }
