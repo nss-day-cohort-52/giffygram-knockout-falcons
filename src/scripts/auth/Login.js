@@ -1,5 +1,7 @@
 import { getUsers } from "../data/provider.js"
+
 import { registerUser } from "./register.js"
+
 
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
