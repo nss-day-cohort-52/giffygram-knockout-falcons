@@ -14,7 +14,8 @@ const applicationState = {
     messages: [],
     follows: []
 }
-const mainContainer = document.querySelector("#container")
+
+const mainContainer = document.querySelector(".giffygram")
 
 export const fetchUsers = () => {
     return fetch(`${API}/users`)
@@ -98,7 +99,7 @@ export const sendRegistration = (userRegistration) => {
         body: JSON.stringify(userRegistration)
     }
 
-    return fetch(`${API}/registrations`, fetchOptions)
+    return fetch(`${API}/users`, fetchOptions)
     .then(response => response.json())
     .then(() => {
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))

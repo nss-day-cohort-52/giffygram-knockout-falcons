@@ -1,3 +1,4 @@
+import { sendRegistration } from "../data/provider.js"
 
 export const registerUser = () => {
     let html = `
@@ -7,11 +8,11 @@ export const registerUser = () => {
     </div>
     <div class="field">
     <label class="label" for="userEmail">Email</label>
-    <input type="text" name="userEmails" class="input" />
+    <input type="text" name="userEmail" class="input" />
     </div>
     <div class="field>
-    <label class="label" for="userPassword>Password</label>
-    input type="text" name="userPassword" class="input" />
+    <label class="label" for="userPassword">Password</label>
+    <input type="text" name="userPassword" class="input" />
     </div>
 
     <button class="button" id="registerUser">Register</button>
@@ -20,14 +21,14 @@ export const registerUser = () => {
     return html
 }
 
-const mainContainer = document.querySelector("#container")
+const mainContainer = document.querySelector(".giffygram")
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "registerUser") {
         const userName = document.querySelector("input[name='userName']").value
         const userEmail = document.querySelector("input[name='userEmail']").value
-        const userPassword = document.querySelector("input[name='password']").value
-        
+        const userPassword = document.querySelector("input[name='userPassword']").value
+
         const dataToSendToAPI = {
             name: userName,
             email: userEmail,
@@ -35,25 +36,5 @@ mainContainer.addEventListener("click", clickEvent => {
         }
 
         sendRegistration(dataToSendToAPI)
-}
+    }
 })
-
-export const registerUser = () => {
-    return `
-        <div class="registerForm">
-            <form>
-                <fieldset>
-                    <label for=
-                <fieldset>
-                    <label for="email">Email:</label>
-                    <input type="text" name="email" autofocus placeholder="Email address" />
-                </fieldset>
-                <fieldset>
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" placeholder="Password" />
-                </fieldset>
-            </form>
-            <button id="loginButton">Login</button>
-        </div>
-    `
-}
