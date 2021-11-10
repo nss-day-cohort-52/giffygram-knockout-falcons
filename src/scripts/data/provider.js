@@ -1,7 +1,6 @@
 const API = "http://localhost:3000"
 const applicationElement = document.querySelector(".giffygram")
 
-
 const applicationState = {
     currentUser: {},
     feed: {
@@ -16,6 +15,8 @@ const applicationState = {
     follows: []
 }
 
+const mainContainer = document.querySelector(".giffygram")
+
 export const fetchUsers = () => {
     return fetch(`${API}/users`)
         .then(response => response.json())
@@ -23,13 +24,12 @@ export const fetchUsers = () => {
             (login) => {
                 applicationState.users = login
             }
-        )
+    )
 }
 
 export const getUsers = () => {
     return applicationState.users.map(user => ({ ...user }))
 }
-
 
 export const savePost = (postObj) => {
     const fetchOptions = {
@@ -39,14 +39,12 @@ export const savePost = (postObj) => {
         },
         body: JSON.stringify(postObj)
     }
-
     return fetch(`${API}/posts`, fetchOptions)
         .then(response => response.json())
         .then(() => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
-
 export const saveMessage = (messageObj) => {
     const fetchOptions = {
         method: "POST",
@@ -55,14 +53,12 @@ export const saveMessage = (messageObj) => {
         },
         body: JSON.stringify(messageObj)
     }
-
     return fetch(`${API}/messages`, fetchOptions)
         .then(response => response.json())
         .then(() => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
-
 export const saveLike = (likeObj) => {
     const fetchOptions = {
         method: "POST",
@@ -71,14 +67,12 @@ export const saveLike = (likeObj) => {
         },
         body: JSON.stringify(likeObj)
     }
-
     return fetch(`${API}/likes`, fetchOptions)
         .then(response => response.json())
         .then(() => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
-
 export const deletePost = (id) => {
     return fetch(`${API}/posts/${id}`, { method: "DELETE" })
         .then(
@@ -87,7 +81,6 @@ export const deletePost = (id) => {
             }
         )
 }
-
 export const deleteLike = (id) => {
     return fetch(`${API}/likes/${id}`, { method: "DELETE" })
         .then(
@@ -97,6 +90,18 @@ export const deleteLike = (id) => {
         )
 }
 
-export const getCurrentUser = () => {
-    return applicationState.feed.chosenUser
+export const sendRegistration = (userRegistration) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userRegistration)
+    }
+
+    return fetch(`${API}/users`, fetchOptions)
+    .then(response => response.json())
+    .then(() => {
+        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+    })
 }

@@ -1,4 +1,4 @@
-import { getCurrentUser, savePost } from "../data/provider.js"
+import { savePost } from "../data/provider.js"
 
 
 
