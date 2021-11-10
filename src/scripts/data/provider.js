@@ -43,7 +43,7 @@ export const savePost = (postObj) => {
     return fetch(`${API}/posts`, fetchOptions)
         .then(response => response.json())
         .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
 
@@ -59,7 +59,7 @@ export const saveMessage = (messageObj) => {
     return fetch(`${API}/messages`, fetchOptions)
         .then(response => response.json())
         .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
 
@@ -75,7 +75,7 @@ export const saveLike = (likeObj) => {
     return fetch(`${API}/likes`, fetchOptions)
         .then(response => response.json())
         .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
 
@@ -95,4 +95,8 @@ export const deleteLike = (id) => {
                 applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
             }
         )
+}
+
+export const getCurrentUser = () => {
+    return applicationState.feed.chosenUser
 }

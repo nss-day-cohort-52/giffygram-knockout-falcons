@@ -13,3 +13,10 @@ export const renderApp = () => {
     }
 }
 renderApp()
+
+applicationElement.addEventListener(
+    "stateChanged",
+    customEvent => {
+        renderApp()
+    }
+)
