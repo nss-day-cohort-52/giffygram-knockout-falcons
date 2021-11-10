@@ -1,5 +1,5 @@
 import { getUsers } from "../data/provider.js"
-import { registerUser } from "./register.js"
+import { registerUser } from "./Register.js"
 
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
@@ -42,6 +42,7 @@ export const LoginForm = () => {
                 </fieldset>
             </form>
             <button id="loginButton">Login</button>
+            <button id="cancelLogin">Cancel</button>
             <button id="registerButton">RegisterUser</button>
         </div>
         <div class="registrationForm"></div>
