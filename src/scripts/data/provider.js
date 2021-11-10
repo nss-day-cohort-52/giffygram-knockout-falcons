@@ -31,23 +31,6 @@ export const getUsers = () => {
 }
 
 
-
-export const createUser = (userObj) => {
-    const fetchOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userObj)
-    }
-
-    return fetch(`${API}/users`, fetchOptions)
-        .then(response => response.json())
-        .then(() => {
-            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
-        })
-}
-
 export const savePost = (postObj) => {
     const fetchOptions = {
         method: "POST",
