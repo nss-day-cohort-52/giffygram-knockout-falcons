@@ -88,3 +88,19 @@ export const deleteLike = (id) => {
             }
         )
 }
+
+export const sendRegistration = (userRegistration) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userRegistration)
+    }
+
+    return fetch(`${API}/registrations`, fetchOptions)
+    .then(response => response.json())
+    .then(() => {
+        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+    })
+}

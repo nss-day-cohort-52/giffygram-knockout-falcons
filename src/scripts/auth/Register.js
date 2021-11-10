@@ -20,31 +20,30 @@ export const registerUser = () => {
     return html
 }
 
-document.addEventListener("click", clickEvent => {
+const mainContainer = document.querySelector("#container")
+
+mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "registerUser") {
-        let foundUser = null
-        const userState = getUsers()
-
-        const email = document.querySelector("input[name='email']").value
-        const password = document.querySelector("input[name='password']").value
-
-        for (const user of userState) {
-            if (user.email === email && user.password === password) {
-                foundUser = user
-            }
+        const userName = document.querySelector("input[name='userName']").value
+        const userEmail = document.querySelector("input[name='userEmail']").value
+        const userPassword = document.querySelector("input[name='password']").value
+        
+        const dataToSendToAPI = {
+            name: userName,
+            email: userEmail,
+            password: userPassword
         }
 
-        if (foundUser !== null) {
-            localStorage.setItem("gg_user", foundUser.id)
-            document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
-        }
-    }
+        sendRegistration(dataToSendToAPI)
+}
 })
 
-export const LoginForm = () => {
+export const registerUser = () => {
     return `
-        <div class="loginForm">
+        <div class="registerForm">
             <form>
+                <fieldset>
+                    <label for=
                 <fieldset>
                     <label for="email">Email:</label>
                     <input type="text" name="email" autofocus placeholder="Email address" />
