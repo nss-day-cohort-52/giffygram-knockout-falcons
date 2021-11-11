@@ -1,11 +1,38 @@
 import { PostList } from "./feed/PostList.js"
 import { NavBar } from "./nav/NavBar.js"
+import { MessageForm } from "./message/MessageForm.js"
+
+let messageForm = false
 
 export const GiffyGram = () => {
-
     // Show main main UI
-    return `
-    ${NavBar()}
-    ${PostList()}
-    `
+    if (messageForm === false) {
+        return `
+        <nav class="navigation">${NavBar()}</nav>
+        <section class="empty"></section>
+        <section class="giffygram__feed">${PostList()}</section>
+        <footer class="footer>Footer</footer>
+        `
+    } else {
+        return `
+        <nav class="navigation">${NavBar()}</nav>
+        <section class="directMessage">${MessageForm()}</section>
+        <section class="giffygram__feed">${PostList()}</section>
+        <footer class="footer>Footer</footer>
+
+        `
+    }
+
 }
+
+
+const applicationElement = document.querySelector(".giffygram")
+applicationElement.addEventListener(
+    "newDirectMessage",
+    customEvent => {
+        messageForm = true
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+
+    }
+)
+

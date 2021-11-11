@@ -1,6 +1,6 @@
 
 
-import { getUsers } from "../data/provider.js"
+import { getUsers, saveMessage } from "../data/provider.js"
 
 const mainContainer = document.querySelector(".giffygram")
 
