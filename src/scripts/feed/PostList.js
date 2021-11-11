@@ -1,4 +1,4 @@
-import { deleteLike, getLikes, getPosts, getUsers, saveLike } from "../data/provider.js"
+import { deleteLike, deletePost, getLikes, getPosts, getUsers, saveLike } from "../data/provider.js"
 import { PostGif } from "./PostForm.js"
 
 const PostBuilder = (postObj) => {
@@ -86,6 +86,17 @@ mainContainer.addEventListener("click", clickEvent => {
     
             saveLike(likeObj)
         }
+
+    }
+})
+
+mainContainer.addEventListener("click", clickEvent => {
+    //check if id starts with
+    if (clickEvent.target.id.startsWith("deletePost--")) {
+        //split at -- to grab postId
+        const [, postId] = clickEvent.target.id.split("--")
+
+        deletePost(parseInt(postId))
 
     }
 })
