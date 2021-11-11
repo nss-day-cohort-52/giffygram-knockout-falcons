@@ -5,7 +5,6 @@ const PostBuilder = (postObj) => {
     const timestamp = postObj.timestamp
     const date = new Date(timestamp)
     const dateString = date.toLocaleDateString()
-    console.log(dateString)
     const users = getUsers()
     const foundUser = users.find(
         (user) => {
