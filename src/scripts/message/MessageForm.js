@@ -9,13 +9,13 @@ mainContainer.addEventListener("click", clickEvent => {
 
         const messageObj = {
             userId: parseInt(localStorage.getItem("gg_user")),
-            recipientId: parseInt(document.querySelector("option[class='recipient']").value),
+            recipientId: parseInt(document.querySelector("select[id='recipient-Dropdown']").value),
             message: document.querySelector("input[name='direct-Message']").value
         }
 
         saveMessage(messageObj)
 
-        window.alert(`Message Sent`)
+        
     }
 })
 
@@ -66,7 +66,7 @@ const Recipient = () => {
     const recipients = getUsers()
     let html = ""
     html += "<select id='recipient-Dropdown'>"
-    html += '<option  name="recipient" value="0" selected>Select a Recipient</option>'
+    html += '<option  class="recipient" value="0">Select a Recipient</option>'
     //assigning selection options for the dropdown menu 
     const arrayOfRecipients = recipients.map((recipient) => {
 

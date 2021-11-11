@@ -112,6 +112,7 @@ export const saveMessage = (messageObj) => {
     return fetch(`${API}/messages`, fetchOptions)
         .then(response => response.json())
         .then(() => {
+            window.alert(`Message Sent`)
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
