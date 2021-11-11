@@ -48,8 +48,14 @@ mainContainer.addEventListener("click", clickEvent => {
             description: document.querySelector("textarea[name='caption']").value,
             timestamp: Date.now()
         }
+
+        if (postObj.title && postObj.url && postObj.description) {
+            savePost(postObj)
+        
+        } else {
+            window.alert(`Please fill out all fields completely`)
+        }
      
-        savePost(postObj)
     }
 })
 
