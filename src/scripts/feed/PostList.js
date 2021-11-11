@@ -24,11 +24,11 @@ const PostBuilder = (postObj) => {
     const likes = getLikes()
     const foundLike = likes.find(
         (likeObj) => {
-            return (likeObj.postId === postObj.id)
+            return (likeObj.postId === postObj.id && likeObj.userId === parseInt(localStorage.getItem("gg_user")))
         }
     )
 
-    if (foundLike && foundLike.userId === parseInt(localStorage.getItem("gg_user"))) {
+    if (foundLike) {
         html += `<div class="star-icon"><img id="favoritePost--${postObj.id}" class="actionIcon" src="../images/favorite-star-yellow.svg"></div>`
     } else {
         html += `<div class="star-icon"><img id="favoritePost--${postObj.id}" class="actionIcon" src="../images/favorite-star-blank.svg"></div>`
@@ -74,13 +74,13 @@ mainContainer.addEventListener("click", clickEvent => {
             }
         )
 
-        if (foundLike) {
+        if (foundLike && foundLike.userId === parseInt(localStorage.getItem("gg_user"))) {
             deleteLike(foundLike.id)
 
         } else {
             
             const likeObj = {
-                userId: foundPost.userId,
+                userId: parseInt(localStorage.getItem("gg_user")),
                 postId: parseInt(postId)
             }
     
