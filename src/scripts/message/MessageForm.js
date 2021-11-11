@@ -29,6 +29,13 @@ mainContainer.addEventListener("click", clickEvent => {
     }
 })
 
+mainContainer.addEventListener("click", clickEvent => {
+if (clickEvent.target.id === "directMessage__close") {
+    mainContainer.dispatchEvent(new CustomEvent("closeDirectMessage"))
+}
+
+})
+
 
 
 export const MessageForm = () => {

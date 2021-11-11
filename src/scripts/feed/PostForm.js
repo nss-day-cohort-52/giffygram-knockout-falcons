@@ -48,7 +48,7 @@ mainContainer.addEventListener("click", clickEvent => {
             description: document.querySelector("textarea[name='caption']").value,
             timestamp: Date.now()
         }
-
+     
         savePost(postObj)
     }
 })
