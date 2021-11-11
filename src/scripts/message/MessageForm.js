@@ -5,7 +5,7 @@ import { getUsers, saveMessage } from "../data/provider.js"
 const mainContainer = document.querySelector(".giffygram")
 
 mainContainer.addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "send-message") {
+    if (clickEvent.target.id === "directMessage__submit") {
 
         const messageObj = {
             userId: parseInt(localStorage.getItem("gg_user")),
@@ -14,13 +14,16 @@ mainContainer.addEventListener("click", clickEvent => {
         }
 
         saveMessage(messageObj)
+
+        window.alert(`Message Sent`)
     }
 })
 
-mainContainer.addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "cancel-message") {
 
-    document.querySelector("option#recipient").value = ""
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessage__cancel") {
+
+    document.querySelector("option[class='recipient']").value = ""
     document.querySelector("input[name='direct-Message']").value =""
     
     }
@@ -31,18 +34,19 @@ mainContainer.addEventListener("click", clickEvent => {
 export const MessageForm = () => {
     let html = `
     <h3>Direct Message</h3>
-        <div class= "directMessage">
+        <div class= "message__inout">
          Recipient:
             ${Recipient()}
         </div>
-        <div class= "directMessage">
+        <div class= "message__input">
         Message:
             <label class="label" for="direct-Message"></label>
             <input type="text" name="direct-Message" class="input" />
         </div>
 
-        <button class="send-button" id="send-message">Send Message</button>
-        <button class="cancel-button" id="cancel-message">Cancel</button>
+        <button id="directMessage__submit">Send Message</button>
+        <button id="directMessage__cancel"">Cancel</button>
+        <button id="directMessage__close">X</button>
     `
 
     return html
