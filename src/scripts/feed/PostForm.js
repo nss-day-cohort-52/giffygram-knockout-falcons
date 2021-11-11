@@ -30,7 +30,7 @@ const PostForm = () => {
             <textarea class="newPost__description" id="caption" name="caption" placeholder="Story behind your gif..." rows="3" cols="50"></textarea>
         </div>
 
-        <button type="button" id="savePost">Save</button>
+        <button type="button" id="savePost">Post</button>
         <button type="button" id="cancelPost">Cancel</button>
 
     </section>
@@ -56,7 +56,7 @@ mainContainer.addEventListener("click", clickEvent => {
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "cancelPost") {
 
-        localStorage.setItem("gg_user", null)
+        // localStorage.setItem("gg_user", null)
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
