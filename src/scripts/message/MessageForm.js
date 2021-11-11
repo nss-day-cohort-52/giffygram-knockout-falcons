@@ -2,6 +2,25 @@
 
 import { getUsers } from "../data/provider.js"
 
+const mainContainer = document.querySelector(".giffygram")
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "send-message") {
+
+        const messageObj = {
+            userId: parseInt(localStorage.getItem("gg_user")),
+            title: document.querySelector("textarea[name='title']").value,
+            url: document.querySelector("textarea[name='url']").value,
+            description: document.querySelector("textarea[name='caption']").value,
+            timestamp: Date.now()
+        }
+
+        sendMessage(messageObj)
+    }
+})
+
+
+
 
 export const MessageForm = () => {
     let html = `
@@ -18,6 +37,9 @@ export const MessageForm = () => {
 
     return html
 }
+
+
+
 const Recipient = () => {
     // declare a var whos value is the result of the getRecipients function
     const recipients = getUsers()
