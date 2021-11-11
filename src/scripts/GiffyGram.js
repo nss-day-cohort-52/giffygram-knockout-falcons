@@ -39,3 +39,11 @@ applicationElement.addEventListener(
     }
 )
 
+applicationElement.addEventListener(
+    "closeDirectMessage",
+    customEvent => {
+        messageForm = false
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+
+    }
+)
