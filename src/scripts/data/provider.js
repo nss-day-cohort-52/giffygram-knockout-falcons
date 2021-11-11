@@ -75,11 +75,11 @@ export const getPosts = () => {
     return applicationState.posts.map(post => ({ ...post }))
 }
 
-export const getlikes = () => {
+export const getLikes = () => {
     return applicationState.likes.map(like => ({ ...like }))
 }
 
-export const getmessages = () => {
+export const getMessages = () => {
     return applicationState.messages.map(message => ({ ...message }))
 }
 
