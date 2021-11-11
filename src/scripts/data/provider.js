@@ -161,3 +161,4 @@ export const sendRegistration = (userRegistration) => {
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
     })
 }
+

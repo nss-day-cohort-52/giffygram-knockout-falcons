@@ -9,16 +9,22 @@ mainContainer.addEventListener("click", clickEvent => {
 
         const messageObj = {
             userId: parseInt(localStorage.getItem("gg_user")),
-            title: document.querySelector("textarea[name='title']").value,
-            url: document.querySelector("textarea[name='url']").value,
-            description: document.querySelector("textarea[name='caption']").value,
-            timestamp: Date.now()
+            recipientId: parseInt(document.querySelector("option#recipient").value),
+            message: document.querySelector("input[name='direct-Message']").value
         }
 
-        sendMessage(messageObj)
+        saveMessage(messageObj)
     }
 })
 
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "cancel-message") {
+
+    document.querySelector("option#recipient").value = ""
+    document.querySelector("input[name='direct-Message']").value =""
+    
+    }
+})
 
 
 
@@ -33,6 +39,7 @@ export const MessageForm = () => {
         </div>
 
         <button class="send-button" id="send-message">Send Message</button>
+        <button class="cancel-button" id="cancel-message">Cancel</button>
     `
 
     return html
@@ -45,11 +52,11 @@ const Recipient = () => {
     const recipients = getUsers()
     let html = ""
     html += "<select id='recipient-Dropdown'>"
-    html += '<option name="recipient" value="0">Select a Recipient</option>'
+    html += '<option id="recipient" name="recipient" value="0">Select a Recipient</option>'
     //assigning selection options for the dropdown menu 
     const arrayOfRecipients = recipients.map((recipient) => {
 
-        return `<option value="${recipient.id}" selected>${recipient.name}</option>`
+        return `<option id="recipient--${recipient.id}"value="${recipient.id}" selected>${recipient.name}</option>`
         }
     )
     html += arrayOfRecipients.join("")
