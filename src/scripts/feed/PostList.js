@@ -28,7 +28,7 @@ const PostBuilder = (postObj) => {
         }
     )
 
-    if (foundLike) {
+    if (foundLike && foundLike.userId === parseInt(localStorage.getItem("gg_user"))) {
         html += `<div class="star-icon"><img id="favoritePost--${postObj.id}" class="actionIcon" src="../images/favorite-star-yellow.svg"></div>`
     } else {
         html += `<div class="star-icon"><img id="favoritePost--${postObj.id}" class="actionIcon" src="../images/favorite-star-blank.svg"></div>`
