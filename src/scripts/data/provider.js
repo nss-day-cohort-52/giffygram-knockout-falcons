@@ -27,8 +27,64 @@ export const fetchUsers = () => {
     )
 }
 
+export const fetchPosts = () => {
+    return fetch(`${API}/posts`)
+        .then(response => response.json())
+        .then(
+            (posts) => {
+                applicationState.posts = posts
+            }
+    )
+}
+
+export const fetchLikes = () => {
+    return fetch(`${API}/likes`)
+        .then(response => response.json())
+        .then(
+            (likes) => {
+                applicationState.likes = likes
+            }
+    )
+}
+
+export const fetchMessages = () => {
+    return fetch(`${API}/messages`)
+        .then(response => response.json())
+        .then(
+            (messages) => {
+                applicationState.messages = messages
+            }
+    )
+}
+
+export const fetchFollows = () => {
+    return fetch(`${API}/follows`)
+        .then(response => response.json())
+        .then(
+            (follows) => {
+                applicationState.follows = follows
+            }
+    )
+}
+
 export const getUsers = () => {
     return applicationState.users.map(user => ({ ...user }))
+}
+
+export const getPosts = () => {
+    return applicationState.posts.map(post => ({ ...post }))
+}
+
+export const getlikes = () => {
+    return applicationState.likes.map(like => ({ ...like }))
+}
+
+export const getmessages = () => {
+    return applicationState.messages.map(message => ({ ...message }))
+}
+
+export const getFollows = () => {
+    return applicationState.follows.map(follow => ({ ...follow }))
 }
 
 export const savePost = (postObj) => {
