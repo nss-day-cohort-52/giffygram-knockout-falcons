@@ -1,9 +1,9 @@
+import { PostList } from "../feed/PostList.js"
+import { MessageForm } from "../message/MessageForm.js"
 
 
 export const NavBar = () => {
     return `
-    <nav class="navigation">
-
     <div class="navigation__item navigation__icon">
         <img src="../images/pb.png" alt="Giffygram icons" id="logo">
     </div>
@@ -19,7 +19,6 @@ export const NavBar = () => {
     <div class="nagivator__item navigation__logout">
         <button id="logout" class="fakeLink">Logout</button>
     </div>
-    </nav>
     `
 }
 
@@ -31,6 +30,15 @@ mainContainer.addEventListener("click", clickEvent => {
 
         localStorage.setItem("gg_user", null)
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+
+    }
+})
+
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessageIcon") {
+
+        mainContainer.dispatchEvent(new CustomEvent("newDirectMessage"))
 
     }
 })

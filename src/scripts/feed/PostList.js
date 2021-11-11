@@ -32,14 +32,12 @@ const PostBuilder = (postObj) => {
 }
 
 export const PostList = () => {
-
     const posts = getPosts()
-    let html = `<section class="giffygram__feed">
-                <section class="newPost">${PostGif()}</section>`
+    let html = `
+                <section class="miniMod">${PostGif()}</section>`
 
     const postListItems = posts.map(PostBuilder)
     html += postListItems.join("")
-    html += `</section>`
     return html
 
 }
