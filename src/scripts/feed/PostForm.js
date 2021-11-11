@@ -1,28 +1,42 @@
 import { savePost } from "../data/provider.js"
 
+const mainContainer = document.querySelector(".giffygram")
 
-
-export const PostForm = () => {
+export const PostGif = () => {
     return `
-    <section class="post-form">
+    <section class="post-gif">
+    <section class="miniMode" id="post-gif">Have a gif to post?</section>
+    </section>
+    `
+}
+
+document.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "post-gif") {
+        document.querySelector(".post-gif").innerHTML = PostForm()
+    }
+
+})
+
+const PostForm = () => {
+    return `
+    <section class="newPost">
         <div class="field">
-            <textarea id="title" name="title" placeholder="Title" rows="1" cols="50"></textarea>
+            <textarea class="newPost__input" id="title" name="title" placeholder="Title" rows="1" cols="50"></textarea>
         </div>
         <div class="field">
-            <textarea id="url" name="url" placeholder="URL of gif" rows="1" cols="50"></textarea>
+            <textarea class="newPost__input" id="url" name="url" placeholder="URL of gif" rows="1" cols="50"></textarea>
         </div>
         <div class="field">
-            <textarea id="caption" name="caption" placeholder="Story behind your gif..." rows="3" cols="50"></textarea>
+            <textarea class="newPost__description" id="caption" name="caption" placeholder="Story behind your gif..." rows="3" cols="50"></textarea>
         </div>
 
-        <button type="button" id="savePost">Save</button>
+        <button type="button" id="savePost">Post</button>
         <button type="button" id="cancelPost">Cancel</button>
 
     </section>
     `
 }
 
-const mainContainer = document.querySelector(".giffygram")
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "savePost") {
@@ -42,8 +56,8 @@ mainContainer.addEventListener("click", clickEvent => {
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "cancelPost") {
 
+        // localStorage.setItem("gg_user", null)
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
-
 
     }
 })
