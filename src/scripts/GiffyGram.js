@@ -10,7 +10,7 @@ let messageForm = false
 let directMessagePage = false
 export const GiffyGram = () => {
     // Show main main UI
-    if(directMessagePage === true) {
+    if (directMessagePage === true) {
         return `
         <nav class="navigation">${NavBar()}</nav>
         <section class="empty"></section>

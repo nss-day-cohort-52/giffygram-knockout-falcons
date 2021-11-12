@@ -48,10 +48,10 @@ mainContainer.addEventListener("click", clickEvent => {
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessageCounter") {
-       
+
         mainContainer.dispatchEvent(new CustomEvent("changeToDirectMessage"))
-      }
-    })
+    }
+})
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logo") {

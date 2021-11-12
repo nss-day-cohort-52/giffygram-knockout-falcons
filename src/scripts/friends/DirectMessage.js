@@ -33,7 +33,7 @@ export const DirectMessages = () => {
         `
     }
     )
-    html += arrayOfUserMessages.join("")
+    html += arrayOfUserMessages.reverse().join("")
     html += "</div>"
     Promise.all(fetchsForMessages)
 
