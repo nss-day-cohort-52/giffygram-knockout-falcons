@@ -1,4 +1,4 @@
-import { getMessages, getUsers } from '../data/provider.js'
+import { getUsers, userMessages } from '../data/provider.js'
 
 
 
@@ -8,20 +8,12 @@ import { getMessages, getUsers } from '../data/provider.js'
 
 
 export const DirectMessages = () => {
+    const theUsersMessages = userMessages()
     const usersArray = getUsers()
-    const messages = getMessages()
-    // display an array of only messages that match gg_user (filter)
-    const currentUser = parseInt(localStorage.getItem("gg_user"))
-    const messageFilterFunction = (messageobj) => {
-        if (messageobj.recipientId === currentUser)
-        return messageobj
-    }
-    const userMessages = messages.filter(messageFilterFunction)
-    
 
     let html = ""
     html += "<div class='messageList'>"
-    const arrayOfUserMessages = userMessages.map((message) => {
+    const arrayOfUserMessages = theUsersMessages.map((message) => {
         const foundSenderObj = usersArray.find(senderObj => message.userId === senderObj.id)
 
         return `
