@@ -1,9 +1,10 @@
 import { PostList } from "../feed/PostList.js"
 import { MessageForm } from "../message/MessageForm.js"
-
-
+import { userMessages } from "../data/provider.js"
 
 export const NavBar = () => {
+    const messagesArray = userMessages()
+    const numberOfMessages = messagesArray.length
     return `
     <div class="navigation__item navigation__icon">
         <img src="../images/pb.png" alt="Giffygram icons" id="logo">
@@ -14,7 +15,7 @@ export const NavBar = () => {
 
     <div class="navigator__item navigation__message">
         <img id="directMessageIcon" src="../images/fountain-pen.svg" alt="Direct message">
-        <div id="directMessageCounter" class="notification__count">0</div>
+        <div id="directMessageCounter" class="notification__count">${numberOfMessages}</div>
     </div>
 
     <div class="nagivator__item navigation__logout">
