@@ -1,4 +1,4 @@
-import { getUsers, userMessages } from '../data/provider.js'
+import { updateMessages, getUsers, userMessages } from '../data/provider.js'
 
 
 
@@ -10,7 +10,12 @@ import { getUsers, userMessages } from '../data/provider.js'
 export const DirectMessages = () => {
     const theUsersMessages = userMessages()
     const usersArray = getUsers()
+    const fetchsForMessages = theUsersMessages.map(message => {
+        message.read = true
+        return updateMessages(message)
 
+    })
+    
     let html = ""
     html += "<div class='messageList'>"
     const arrayOfUserMessages = theUsersMessages.map((message) => {
@@ -30,5 +35,7 @@ export const DirectMessages = () => {
     )
     html += arrayOfUserMessages.join("")
     html += "</div>"
+    Promise.all(fetchsForMessages)
+
     return html
 }
