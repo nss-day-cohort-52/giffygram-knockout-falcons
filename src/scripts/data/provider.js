@@ -194,3 +194,16 @@ export const setYearFilter = (value) => {
 
 }
 
+export const userMessages = () => {
+    const messages = getMessages()
+    // display an array of only messages that match gg_user (filter)
+    const currentUser = parseInt(localStorage.getItem("gg_user"))
+    const messageFilterFunction = (messageobj) => {
+        if (messageobj.recipientId === currentUser){
+        return messageobj
+        }
+    }
+
+   const filteredArrayMessages = messages.filter(messageFilterFunction)
+return filteredArrayMessages
+}
