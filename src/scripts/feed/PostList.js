@@ -49,54 +49,95 @@ export const PostList = () => {
     const posts = getPosts()
     const allPosts = posts.reverse()
     
-    const userSortedPosts = allPosts.filter(
-        (post) => {
-            return (post.userId === feed.chosenUser)
-        }
-    )
-    let html = `<section class="miniMod">${PostGif()}</section>`
+    // const userSortedPosts = allPosts.filter(
+    //     (post) => {
+    //         return (post.userId === feed.chosenUser)
+    //     }
+    // )
+    // let html = `<section class="miniMod">${PostGif()}</section>`
 
-    const favoritePosts = []
+    // const favoritePosts = []
     
-    allPosts.forEach(
-        (post) => {
-            const likes = getLikes()
-            const foundLike = likes.find(
-            (like) => {
-                return (like.postId ===post.id && like.userId === parseInt(localStorage.getItem("gg_user")))
-                }
-            )
-            if (foundLike) {
-                favoritePosts.push(post)
+    // allPosts.forEach(
+    //     (post) => {
+    //         const likes = getLikes()
+    //         const foundLike = likes.find(
+    //         (like) => {
+    //             return (like.postId ===post.id && like.userId === parseInt(localStorage.getItem("gg_user")))
+    //             }
+    //         )
+    //         if (foundLike) {
+    //             favoritePosts.push(post)
 
-            }
-        }
-    )
+    //         }
+    //     }
+    // )
 
-    const yearSortedPosts = []
-    allPosts.forEach(
-        (post) => {
-            const postYear = new Date(post.timestamp).getFullYear()
-            if(postYear >= feed.chosenYear) {
-                yearSortedPosts.push(post)
-            }
-        }
-    )
+    // const yearSortedPosts = []
+    // allPosts.forEach(
+    //     (post) => {
+    //         const postYear = new Date(post.timestamp).getFullYear()
+    //         if(postYear >= feed.chosenYear) {
+    //             yearSortedPosts.push(post)
+    //         }
+    //     }
+    // )
+    let html = ""
 
-    if (feed.displayFavorites) {
-        const favoriteListItems = favoritePosts.map(PostBuilder)
-        html += favoriteListItems.join("")
+    if (feed.displayFavorites && feed.chosenUser && feed.chosenYear) {
+        const tripleSortedPostsArray = filterByYear(filterByUser(filterByFavorites(allPosts)))
+        const postListItems = tripleSortedPostsArray.map(PostBuilder)
+        html += postListItems.join("")
+        
+    } else if (feed.displayFavorites && feed.chosenUser) {
+        const doubleSortedPostsArray = filterByFavorites(filterByUser(allPosts))
+        const postListItems = doubleSortedPostsArray.map(PostBuilder)
+        html += postListItems.join("")
+
+    } else if (feed.displayFavorites && feed.chosenYear) {
+        const doubleSortedPostsArray = filterByFavorites(filterByYear(allPosts))
+        const postListItems = doubleSortedPostsArray.map(PostBuilder)
+        html += postListItems.join("")
+
+    } else if (feed.chosenUser && feed.chosenYear) {
+        const doubleSortedPostsArray = filterByUser(filterByYear(allPosts))
+        const postListItems = doubleSortedPostsArray.map(PostBuilder)
+        html += postListItems.join("")
+
+    } else if (feed.displayFavorites) {
+        const sortedPostArray = filterByFavorites(allPosts)
+        const postListItems = sortedPostArray.map(PostBuilder)
+        html += postListItems.join("")
+        
     } else if (feed.chosenUser) {
-        const userListItems = userSortedPosts.map(PostBuilder)
-        html += userListItems.join("")
-    } else if (feed.chosenYear) {
-        const yearListItems = yearSortedPosts.map(PostBuilder)
-        html += yearListItems.join("")       
-    }else {
+        const sortedPostArray = filterByUser(allPosts)
+        const postListItems = sortedPostArray.map(PostBuilder)
+        html += postListItems.join("")
 
+    } else if (feed.chosenYear) {
+        const sortedPostArray = filterByYear(allPosts)
+        const postListItems = sortedPostArray.map(PostBuilder)
+        html += postListItems.join("")
+
+    } else {
         const postListItems = allPosts.map(PostBuilder)
         html += postListItems.join("")
     }
+
+    // if (feed.displayFavorites) {
+    //     const favoriteListItems = favoritePosts.map(PostBuilder)
+    //     html += favoriteListItems.join("")
+    // } else if (feed.chosenUser) {
+    //     const userListItems = userSortedPosts.map(PostBuilder)
+    //     html += userListItems.join("")
+    // } else if (feed.chosenYear) {
+    //     const yearListItems = yearSortedPosts.map(PostBuilder)
+    //     html += yearListItems.join("")       
+    // }else {
+
+    //     const postListItems = allPosts.map(PostBuilder)
+    //     html += postListItems.join("")
+    // }
 
     return html
 }
@@ -148,3 +189,47 @@ mainContainer.addEventListener("click", clickEvent => {
 
     }
 })
+
+
+const filterByUser = (array) => {
+    debugger
+    const feed = getFeed()
+    array.filter(
+        (post) => {
+            return (post.userId === feed.chosenUser)
+        }
+    )
+}
+
+const filterByYear = (array) => {
+    const feed = getFeed()
+    const yearSortedPosts = []
+    array.forEach(
+        (post) => {
+            const postYear = new Date(post.timestamp).getFullYear()
+            if(postYear >= feed.chosenYear) {
+                yearSortedPosts.push(post)
+            }
+        }
+    )
+    return yearSortedPosts
+}
+
+const filterByFavorites = (array) => {
+    const favoritePosts = []
+    array.forEach(
+        (post) => {
+            const likes = getLikes()
+            const foundLike = likes.find(
+            (like) => {
+                return (like.postId ===post.id && like.userId === parseInt(localStorage.getItem("gg_user")))
+                }
+            )
+            if (foundLike) {
+                favoritePosts.push(post)
+
+            }
+        }
+    )
+    return favoritePosts
+}
