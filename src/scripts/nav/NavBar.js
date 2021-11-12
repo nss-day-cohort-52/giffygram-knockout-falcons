@@ -1,17 +1,24 @@
 import { PostList } from "../feed/PostList.js"
 import { MessageForm } from "../message/MessageForm.js"
-import { userMessages } from "../data/provider.js"
+import { getUsers, userMessages } from "../data/provider.js"
 
 export const NavBar = () => {
     const messagesArray = userMessages()
     const numberOfMessages = messagesArray.length
+    const users = getUsers()
+    const currentUser = users.find(
+        (user) => {
+            return user.id === parseInt(localStorage.getItem("gg_user"))
+        }
+    )
     return `
     <div class="navigation__item navigation__icon">
         <img src="../images/pb.png" alt="Giffygram icons" id="logo">
     </div>
     
-    <div class"navigation__item navigation__name">Giffygram</div>
-    <div class="navigation__item navigation__search"></div>
+    <div class="navigation__item navigation__name">Giffygram</div>
+    
+    <div class="navigation__item navigation__userName">Welcome, ${currentUser.name}!</div>
 
     <div class="navigator__item navigation__message">
         <img id="directMessageIcon" src="../images/fountain-pen.svg" alt="Direct message">
@@ -55,7 +62,7 @@ mainContainer.addEventListener("click", clickEvent => {
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logo") {
-
+        
         mainContainer.dispatchEvent(new CustomEvent("homepage"))
     }
 })

@@ -12,7 +12,18 @@ const applicationState = {
     likes: [],
     posts: [],
     messages: [],
-    follows: []
+    follows: [],
+    profileId: null
+}
+
+export const getProfileId = () => {
+    return applicationState.profileId
+}
+
+export const setProfileId = (id) => {
+
+    applicationState.profileId = id
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
 const mainContainer = document.querySelector(".giffygram")
