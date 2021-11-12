@@ -44,7 +44,8 @@ const PostBuilder = (postObj) => {
 }
 
 export const PostList = () => {
-    const allPosts = getPosts()
+    const posts = getPosts()
+    const allPosts = posts.reverse()
     const feed = getFeed()
     
     const userSortedPosts = allPosts.filter(
