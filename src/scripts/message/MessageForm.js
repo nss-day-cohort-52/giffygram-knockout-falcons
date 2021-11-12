@@ -10,7 +10,8 @@ mainContainer.addEventListener("click", clickEvent => {
         const messageObj = {
             userId: parseInt(localStorage.getItem("gg_user")),
             recipientId: parseInt(document.querySelector("select[id='recipient-Dropdown']").value),
-            message: document.querySelector("input[name='direct-Message']").value
+            message: document.querySelector("input[name='direct-Message']").value,
+            read: false
         }
 
         saveMessage(messageObj)
