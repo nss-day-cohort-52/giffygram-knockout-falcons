@@ -29,6 +29,7 @@ mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logout") {
 
         localStorage.setItem("gg_user", null)
+        mainContainer.dispatchEvent(new CustomEvent("closeDirectMessage"))
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
 
     }

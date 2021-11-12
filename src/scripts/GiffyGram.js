@@ -1,6 +1,7 @@
 import { PostList } from "./feed/PostList.js"
 import { NavBar } from "./nav/NavBar.js"
 import { MessageForm } from "./message/MessageForm.js"
+import { Footer } from "./nav/Footer.js"
 
 
 
@@ -14,14 +15,14 @@ export const GiffyGram = () => {
         <nav class="navigation">${NavBar()}</nav>
         <section class="empty"></section>
         <section class="giffygram__feed">${PostList()}</section>
-        <footer class="footer>Footer</footer>
+        <footer class="footer">${Footer()}</footer>
         `
     } else {
         return `
         <nav class="navigation">${NavBar()}</nav>
         <section class="directMessage">${MessageForm()}</section>
         <section class="giffygram__feed">${PostList()}</section>
-        <footer class="footer>Footer</footer>
+        <footer class="footer">${Footer()}</footer>
 
         `
     }
