@@ -73,13 +73,26 @@ export const PostList = () => {
         }
     )
 
+    const yearSortedPosts = []
+    allPosts.forEach(
+        (post) => {
+            const postYear = new Date(post.timestamp).getFullYear()
+            if(postYear >= feed.chosenYear) {
+                yearSortedPosts.push(post)
+            }
+        }
+    )
+
     if (feed.displayFavorites) {
         const favoriteListItems = favoritePosts.map(PostBuilder)
         html += favoriteListItems.join("")
     } else if (feed.chosenUser) {
-        const postListItems = userSortedPosts.map(PostBuilder)
-        html += postListItems.join("")
-    } else {
+        const userListItems = userSortedPosts.map(PostBuilder)
+        html += userListItems.join("")
+    } else if (feed.chosenYear) {
+        const yearListItems = yearSortedPosts.map(PostBuilder)
+        html += yearListItems.join("")       
+    }else {
 
         const postListItems = allPosts.map(PostBuilder)
         html += postListItems.join("")
