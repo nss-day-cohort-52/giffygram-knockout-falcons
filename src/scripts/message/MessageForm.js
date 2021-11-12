@@ -3,19 +3,26 @@
 import { getUsers, saveMessage } from "../data/provider.js"
 
 const mainContainer = document.querySelector(".giffygram")
-
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__submit") {
 
         const messageObj = {
             userId: parseInt(localStorage.getItem("gg_user")),
             recipientId: parseInt(document.querySelector("select[id='recipient-Dropdown']").value),
-            message: document.querySelector("input[name='direct-Message']").value
+            message: document.querySelector("input[name='direct-Message']").value,
+            read: false
         }
 
-        saveMessage(messageObj)
+        const text = document.querySelector("input[name='direct-Message']").value
+        const name = document.querySelector("select[id='recipient-Dropdown']").value
 
-        
+        if (text && name !== "0") {
+            saveMessage(messageObj)
+        } else {
+            window.alert(`Please fill out all fields completely.`)
+        }
+
+
     }
 })
 
@@ -23,16 +30,16 @@ mainContainer.addEventListener("click", clickEvent => {
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__cancel") {
 
-    document.querySelector("select[id='recipient-Dropdown']").value = "0"
-    document.querySelector("input[name='direct-Message']").value =""
-    
+        document.querySelector("select[id='recipient-Dropdown']").value = "0"
+        document.querySelector("input[name='direct-Message']").value = ""
+
     }
 })
 
 mainContainer.addEventListener("click", clickEvent => {
-if (clickEvent.target.id === "directMessage__close") {
-    mainContainer.dispatchEvent(new CustomEvent("closeDirectMessage"))
-}
+    if (clickEvent.target.id === "directMessage__close") {
+        mainContainer.dispatchEvent(new CustomEvent("closeDirectMessage"))
+    }
 
 })
 
@@ -71,7 +78,7 @@ const Recipient = () => {
     const arrayOfRecipients = recipients.map((recipient) => {
 
         return `<option class="recipient" value="${recipient.id}">${recipient.name}</option>`
-        }
+    }
     )
     html += arrayOfRecipients.join("")
     html += "</select>"
