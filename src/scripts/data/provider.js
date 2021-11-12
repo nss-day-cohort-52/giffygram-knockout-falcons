@@ -24,7 +24,7 @@ export const fetchUsers = () => {
             (login) => {
                 applicationState.users = login
             }
-    )
+        )
 }
 
 export const fetchPosts = () => {
@@ -34,7 +34,7 @@ export const fetchPosts = () => {
             (posts) => {
                 applicationState.posts = posts
             }
-    )
+        )
 }
 
 export const fetchLikes = () => {
@@ -44,7 +44,7 @@ export const fetchLikes = () => {
             (likes) => {
                 applicationState.likes = likes
             }
-    )
+        )
 }
 
 export const fetchMessages = () => {
@@ -54,7 +54,7 @@ export const fetchMessages = () => {
             (messages) => {
                 applicationState.messages = messages
             }
-    )
+        )
 }
 
 export const fetchFollows = () => {
@@ -64,7 +64,7 @@ export const fetchFollows = () => {
             (follows) => {
                 applicationState.follows = follows
             }
-    )
+        )
 }
 
 export const getUsers = () => {
@@ -157,10 +157,10 @@ export const sendRegistration = (userRegistration) => {
     }
 
     return fetch(`${API}/users`, fetchOptions)
-    .then(response => response.json())
-    .then(() => {
-        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
-    })
+        .then(response => response.json())
+        .then(() => {
+            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+        })
 }
 
 export const getFeed = () => {
@@ -199,11 +199,11 @@ export const userMessages = () => {
     // display an array of only messages that match gg_user (filter)
     const currentUser = parseInt(localStorage.getItem("gg_user"))
     const messageFilterFunction = (messageobj) => {
-        if (messageobj.recipientId === currentUser){
-        return messageobj
+        if (messageobj.recipientId === currentUser) {
+            return messageobj
         }
     }
 
-   const filteredArrayMessages = messages.filter(messageFilterFunction)
-return filteredArrayMessages
+    const filteredArrayMessages = messages.filter(messageFilterFunction)
+    return filteredArrayMessages
 }
