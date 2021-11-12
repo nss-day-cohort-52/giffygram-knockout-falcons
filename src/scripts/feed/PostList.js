@@ -192,10 +192,9 @@ mainContainer.addEventListener("click", clickEvent => {
 
 
 const filterByUser = (array) => {
-    debugger
-    const feed = getFeed()
     array.filter(
         (post) => {
+            const feed = getFeed()
             return (post.userId === feed.chosenUser)
         }
     )
