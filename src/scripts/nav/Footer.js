@@ -1,9 +1,9 @@
-import { setUserFilter } from "../data/provider.js"
+import { getFeed, setUserFilter, toggleFavorites } from "../data/provider.js"
 import { UserSelect } from "./UserSelect.js"
 
 
 export const Footer = () => {
-    return `
+    let html = `
         <section class="footer__item">
         Posts Since 
             <select id="yearSelection"></select>
@@ -19,10 +19,14 @@ export const Footer = () => {
 
         <section class="footer__item">
         Show only favorites 
-            <input id="showOnlyFavorites" type="checkbox">
-        </section>
-
-    `
+            <input id="showOnlyFavorites" type="checkbox"`
+    const feed = getFeed()
+    if (feed.displayFavorites) {
+        html += ` checked></section>`
+    } else {
+        html += `></section>`
+    }
+    return html
 }
 
 
@@ -30,7 +34,14 @@ const mainContainer = document.querySelector(".giffygram")
 
 document.addEventListener("change", (event) => {
     if (event.target.id === "userSelection") {
-        setUserFilter(parseInt(event.target.value)) 
+        setUserFilter(parseInt(event.target.value))
+        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+document.addEventListener("change", (event) => {
+    if (event.target.id === "showOnlyFavorites") {
+        toggleFavorites()
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
