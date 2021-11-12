@@ -2,6 +2,7 @@ import { PostList } from "../feed/PostList.js"
 import { MessageForm } from "../message/MessageForm.js"
 
 
+
 export const NavBar = () => {
     return `
     <div class="navigation__item navigation__icon">
@@ -13,7 +14,7 @@ export const NavBar = () => {
 
     <div class="navigator__item navigation__message">
         <img id="directMessageIcon" src="../images/fountain-pen.svg" alt="Direct message">
-        <div class="notification__count">0</div>
+        <div id="directMessageCounter" class="notification__count">0</div>
     </div>
 
     <div class="nagivator__item navigation__logout">
@@ -45,9 +46,15 @@ mainContainer.addEventListener("click", clickEvent => {
 })
 
 mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessageCounter") {
+       
+        mainContainer.dispatchEvent(new CustomEvent("changeToDirectMessage"))
+      }
+    })
+
+mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logo") {
 
         mainContainer.dispatchEvent(new CustomEvent("homepage"))
-
     }
 })
