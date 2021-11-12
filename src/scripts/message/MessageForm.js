@@ -23,7 +23,7 @@ mainContainer.addEventListener("click", clickEvent => {
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__cancel") {
 
-    document.querySelector("option[class='recipient']").value = ""
+    document.querySelector("select[id='recipient-Dropdown']").value = "0"
     document.querySelector("input[name='direct-Message']").value =""
     
     }
