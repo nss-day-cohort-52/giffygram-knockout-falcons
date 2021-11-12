@@ -44,9 +44,10 @@ const PostBuilder = (postObj) => {
 }
 
 export const PostList = () => {
+    const feed = getFeed()
+
     const posts = getPosts()
     const allPosts = posts.reverse()
-    const feed = getFeed()
     
     const userSortedPosts = allPosts.filter(
         (post) => {
@@ -55,7 +56,27 @@ export const PostList = () => {
     )
     let html = `<section class="miniMod">${PostGif()}</section>`
 
-    if (feed.chosenUser) {
+    const favoritePosts = []
+    
+    allPosts.forEach(
+        (post) => {
+            const likes = getLikes()
+            const foundLike = likes.find(
+            (like) => {
+                return (like.postId ===post.id && like.userId === parseInt(localStorage.getItem("gg_user")))
+                }
+            )
+            if (foundLike) {
+                favoritePosts.push(post)
+
+            }
+        }
+    )
+
+    if (feed.displayFavorites) {
+        const favoriteListItems = favoritePosts.map(PostBuilder)
+        html += favoriteListItems.join("")
+    } else if (feed.chosenUser) {
         const postListItems = userSortedPosts.map(PostBuilder)
         html += postListItems.join("")
     } else {

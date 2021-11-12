@@ -173,18 +173,25 @@ export const setUserFilter = (id) => {
     } else if (id === 0) {
         applicationState.feed.chosenUser = null
     }
+    mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+
 }
 
 export const toggleFavorites = () => {
-    if (applicationState.feed.displayFavorites = false) {
-        applicationState.feed.displayFavorites = true
-    } else {
+
+    if (applicationState.feed.displayFavorites) {
         applicationState.feed.displayFavorites = false
+    } else {
+        applicationState.feed.displayFavorites = true
     }
+    mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+
 }
 
 export const setYearFilter = (value) => {
     applicationState.feed.chosenYear = value
+    mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+
 }
 
 export const userMessages = () => {
