@@ -36,7 +36,11 @@ mainContainer.addEventListener("click", clickEvent => {
         }
 
         if (userName && userEmail && userPassword) {
-            sendRegistration(dataToSendToAPI)
+            if (userEmail.includes("@")) {
+                sendRegistration(dataToSendToAPI)
+            } else {
+                window.alert(`Please enter a valid email address.`) 
+            }
         } else {
             window.alert(`Please fill out all fields completely.`)
         }
