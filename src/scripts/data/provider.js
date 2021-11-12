@@ -163,6 +163,20 @@ export const sendRegistration = (userRegistration) => {
         })
 }
 
+export const updateMessages = (messageObj) => {
+    const fetchOptions = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(messageObj)
+    }
+
+    return fetch(`${API}/messages/${messageObj.id}`, fetchOptions)
+    .then(response => response.json())
+    
+}
+
 export const getFeed = () => {
     return applicationState.feed
 }
@@ -199,8 +213,10 @@ export const userMessages = () => {
     // display an array of only messages that match gg_user (filter)
     const currentUser = parseInt(localStorage.getItem("gg_user"))
     const messageFilterFunction = (messageobj) => {
-        if (messageobj.recipientId === currentUser) {
-            return messageobj
+
+        if (messageobj.recipientId === currentUser && messageobj.read === false){
+        return messageobj
+
         }
     }
 
