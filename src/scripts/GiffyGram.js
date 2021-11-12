@@ -68,7 +68,7 @@ applicationElement.addEventListener(
 applicationElement.addEventListener(
     "homepage",
     customEvent => {
-        messageForm = false
+        directMessagePage = false
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
