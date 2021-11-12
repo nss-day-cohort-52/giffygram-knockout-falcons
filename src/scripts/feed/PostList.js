@@ -82,7 +82,7 @@ export const PostList = () => {
     //         }
     //     }
     // )
-    let html = ""
+    let html = `<section class="miniMod">${PostGif()}</section>`
 
     if (feed.displayFavorites && feed.chosenUser && feed.chosenYear) {
         const tripleSortedPostsArray = filterByYear(filterByUser(filterByFavorites(allPosts)))
@@ -123,21 +123,6 @@ export const PostList = () => {
         const postListItems = allPosts.map(PostBuilder)
         html += postListItems.join("")
     }
-
-    // if (feed.displayFavorites) {
-    //     const favoriteListItems = favoritePosts.map(PostBuilder)
-    //     html += favoriteListItems.join("")
-    // } else if (feed.chosenUser) {
-    //     const userListItems = userSortedPosts.map(PostBuilder)
-    //     html += userListItems.join("")
-    // } else if (feed.chosenYear) {
-    //     const yearListItems = yearSortedPosts.map(PostBuilder)
-    //     html += yearListItems.join("")       
-    // }else {
-
-    //     const postListItems = allPosts.map(PostBuilder)
-    //     html += postListItems.join("")
-    // }
 
     return html
 }
@@ -192,12 +177,16 @@ mainContainer.addEventListener("click", clickEvent => {
 
 
 const filterByUser = (array) => {
-    array.filter(
+    const feed = getFeed()
+    const userSortedPosts = []
+    array.forEach(
         (post) => {
-            const feed = getFeed()
-            return (post.userId === feed.chosenUser)
+            if (post.userId === feed.chosenUser) {
+                userSortedPosts.push(post)
+            }
         }
     )
+    return userSortedPosts
 }
 
 const filterByYear = (array) => {
