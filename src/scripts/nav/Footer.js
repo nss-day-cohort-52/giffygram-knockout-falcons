@@ -1,12 +1,15 @@
-import { getFeed, setUserFilter, toggleFavorites } from "../data/provider.js"
+import { getFeed, setUserFilter, setYearFilter, toggleFavorites } from "../data/provider.js"
 import { UserSelect } from "./UserSelect.js"
+import { YearSelect } from "./YearSelect.js"
 
 
 export const Footer = () => {
     let html = `
         <section class="footer__item">
         Posts Since 
-            <select id="yearSelection"></select>
+            <select id="yearSelection">
+            ${YearSelect()}
+            </select>
             <span id="postCount">8</span>
         </section>
         
@@ -45,3 +48,11 @@ document.addEventListener("change", (event) => {
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
+
+document.addEventListener("change", (event) => {
+    if (event.target.id === "yearSelection") {
+        setYearFilter(parseInt(event.target.value))
+        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
