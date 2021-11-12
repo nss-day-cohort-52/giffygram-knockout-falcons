@@ -1,15 +1,22 @@
 import { PostList } from "./feed/PostList.js"
 import { NavBar } from "./nav/NavBar.js"
 import { MessageForm } from "./message/MessageForm.js"
-
+import { DirectMessages } from "./friends/DirectMessage.js"
 
 
 
 let messageForm = false
-
+let directMessagePage = false
 export const GiffyGram = () => {
     // Show main main UI
-    if (messageForm === false) {
+    if(directMessagePage === true) {
+        return `
+        <nav class="navigation">${NavBar()}</nav>
+        <section class="empty"></section>
+        <section class="giffygram__feed">${DirectMessages()}</section>
+        <footer class="footer>Footer</footer>
+        `
+    } else if (messageForm === false) {
         return `
         <nav class="navigation">${NavBar()}</nav>
         <section class="empty"></section>
@@ -43,6 +50,15 @@ applicationElement.addEventListener(
     "closeDirectMessage",
     customEvent => {
         messageForm = false
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+
+    }
+)
+
+applicationElement.addEventListener(
+    "changeToDirectMessage",
+    customEvent => {
+        directMessagePage = true
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
