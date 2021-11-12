@@ -10,7 +10,7 @@ export const Footer = () => {
             <select id="yearSelection">
             ${YearSelect()}
             </select>
-            <span id="postCount">8</span>
+            <span id="postCount"></span>
         </section>
         
         <section class="footer__item">
