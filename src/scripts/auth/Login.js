@@ -16,10 +16,17 @@ document.addEventListener("click", clickEvent => {
             }
         }
 
-        if (foundUser !== null) {
-            localStorage.setItem("gg_user", foundUser.id)
-            document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+        if (email && password) {
+            if (foundUser !== null) {
+                localStorage.setItem("gg_user", foundUser.id)
+                document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+            } else {
+                window.alert(`Info does not match any registered users.`)
+            }
+        } else {
+            window.alert(`Please fill out all fields completely.`)
         }
+
     }
 })
 

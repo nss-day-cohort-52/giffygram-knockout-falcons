@@ -30,6 +30,7 @@ mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "logout") {
 
         localStorage.setItem("gg_user", null)
+        mainContainer.dispatchEvent(new CustomEvent("closeDirectMessage"))
         mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
@@ -46,8 +47,14 @@ mainContainer.addEventListener("click", clickEvent => {
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessageCounter") {
-
-        
+       
         mainContainer.dispatchEvent(new CustomEvent("changeToDirectMessage"))
+      }
+    })
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "logo") {
+
+        mainContainer.dispatchEvent(new CustomEvent("homepage"))
     }
 })

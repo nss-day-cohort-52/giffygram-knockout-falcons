@@ -163,3 +163,27 @@ export const sendRegistration = (userRegistration) => {
     })
 }
 
+export const getFeed = () => {
+    return applicationState.feed
+}
+
+export const setUserFilter = (id) => {
+    if (id > 0) {
+        applicationState.feed.chosenUser = id
+    } else if (id === 0) {
+        applicationState.feed.chosenUser = null
+    }
+}
+
+export const toggleFavorites = () => {
+    if (applicationState.feed.displayFavorites = false) {
+        applicationState.feed.displayFavorites = true
+    } else {
+        applicationState.feed.displayFavorites = false
+    }
+}
+
+export const setYearFilter = (value) => {
+    applicationState.feed.chosenYear = value
+}
+

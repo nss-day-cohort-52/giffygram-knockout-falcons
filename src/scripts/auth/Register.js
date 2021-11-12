@@ -35,6 +35,22 @@ mainContainer.addEventListener("click", clickEvent => {
             password: userPassword
         }
 
-        sendRegistration(dataToSendToAPI)
+        if (userName && userEmail && userPassword) {
+            if (userEmail.includes("@")) {
+                sendRegistration(dataToSendToAPI)
+            } else {
+                window.alert(`Please enter a valid email address.`) 
+            }
+        } else {
+            window.alert(`Please fill out all fields completely.`)
+        }
+
+    }
+})
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "cancel") {
+        mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+
     }
 })

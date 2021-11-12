@@ -1,4 +1,4 @@
-import { deleteLike, deletePost, getLikes, getPosts, getUsers, saveLike } from "../data/provider.js"
+import { deleteLike, deletePost, getFeed, getLikes, getPosts, getUsers, saveLike } from "../data/provider.js"
 import { PostGif } from "./PostForm.js"
 
 const PostBuilder = (postObj) => {
@@ -45,11 +45,25 @@ const PostBuilder = (postObj) => {
 
 export const PostList = () => {
     const posts = getPosts()
-    let html = `
-                <section class="miniMod">${PostGif()}</section>`
+    const allPosts = posts.reverse()
+    const feed = getFeed()
+    
+    const userSortedPosts = allPosts.filter(
+        (post) => {
+            return (post.userId === feed.chosenUser)
+        }
+    )
+    let html = `<section class="miniMod">${PostGif()}</section>`
 
-    const postListItems = posts.map(PostBuilder)
-    html += postListItems.join("")
+    if (feed.chosenUser) {
+        const postListItems = userSortedPosts.map(PostBuilder)
+        html += postListItems.join("")
+    } else {
+
+        const postListItems = allPosts.map(PostBuilder)
+        html += postListItems.join("")
+    }
+
     return html
 }
 
