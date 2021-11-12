@@ -47,3 +47,14 @@ applicationElement.addEventListener(
 
     }
 )
+
+applicationElement.addEventListener(
+    "homepage",
+    customEvent => {
+        messageForm = false
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+
+    }
+)
+
+

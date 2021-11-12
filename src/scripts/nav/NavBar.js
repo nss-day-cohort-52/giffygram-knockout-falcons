@@ -42,3 +42,11 @@ mainContainer.addEventListener("click", clickEvent => {
 
     }
 })
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "logo") {
+
+        mainContainer.dispatchEvent(new CustomEvent("homepage"))
+
+    }
+})
