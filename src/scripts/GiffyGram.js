@@ -85,6 +85,7 @@ applicationElement.addEventListener(
     "changeToDirectMessage",
     customEvent => {
         directMessagePage = true
+        profile = false
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
     }
