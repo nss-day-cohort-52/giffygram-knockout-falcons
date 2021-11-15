@@ -23,6 +23,11 @@
     padding-top: 0.1rem;
 }
 
+.navigation__userName {
+    padding-left: 5rem;
+    padding-top: 0.75rem;
+}
+
 .navigation__icon > img {
     height: 2rem;
 }

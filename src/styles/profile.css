@@ -1,0 +1,11 @@
+
+.userProfile {
+    padding: 7rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile__name{
+    font-size: 2rem;
+}

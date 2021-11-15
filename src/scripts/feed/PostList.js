@@ -1,4 +1,4 @@
-import { deleteLike, deletePost, getFeed, getLikes, getPosts, getUsers, saveLike } from "../data/provider.js"
+import { deleteLike, deletePost, getFeed, getLikes, getPosts, getUsers, saveLike, setProfileId } from "../data/provider.js"
 import { PostGif } from "./PostForm.js"
 
 const PostBuilder = (postObj) => {
@@ -17,7 +17,7 @@ const PostBuilder = (postObj) => {
         <header><h2 class="post__title">${postObj.title}</h2></header>
         <img class="post__image" src="${postObj.url}">
         <section class="post__description">${postObj.description}</section>
-        <section class="post__tagline">Posted by ${foundUser.name} on ${dateString}</section>
+        <section class="post__tagline">Posted by <a href="#" class="profileLink" id="profile--${foundUser.id}">${foundUser.name}</a> on ${dateString}</section>
         <section class="post__actions">`
 
     //check if postObj.id match a likeObj.postId
@@ -48,40 +48,7 @@ export const PostList = () => {
 
     const posts = getPosts()
     const allPosts = posts.reverse()
-    
-    // const userSortedPosts = allPosts.filter(
-    //     (post) => {
-    //         return (post.userId === feed.chosenUser)
-    //     }
-    // )
-    // let html = `<section class="miniMod">${PostGif()}</section>`
 
-    // const favoritePosts = []
-    
-    // allPosts.forEach(
-    //     (post) => {
-    //         const likes = getLikes()
-    //         const foundLike = likes.find(
-    //         (like) => {
-    //             return (like.postId ===post.id && like.userId === parseInt(localStorage.getItem("gg_user")))
-    //             }
-    //         )
-    //         if (foundLike) {
-    //             favoritePosts.push(post)
-
-    //         }
-    //     }
-    // )
-
-    // const yearSortedPosts = []
-    // allPosts.forEach(
-    //     (post) => {
-    //         const postYear = new Date(post.timestamp).getFullYear()
-    //         if(postYear >= feed.chosenYear) {
-    //             yearSortedPosts.push(post)
-    //         }
-    //     }
-    // )
     let html = `<section class="miniMod">${PostGif()}</section>`
 
     if (feed.displayFavorites && feed.chosenUser && feed.chosenYear) {
@@ -174,6 +141,22 @@ mainContainer.addEventListener("click", clickEvent => {
 
     }
 })
+
+mainContainer.addEventListener("click", clickEvent => {
+    //check if id starts with
+    if (clickEvent.target.id.startsWith("profile--")) {
+        //split at -- to grab postId
+        const [, userId] = clickEvent.target.id.split("--")
+
+        setProfileId(parseInt(userId))
+        mainContainer.dispatchEvent(new CustomEvent("profile"))
+
+    }
+})
+
+
+
+
 
 
 const filterByUser = (array) => {
