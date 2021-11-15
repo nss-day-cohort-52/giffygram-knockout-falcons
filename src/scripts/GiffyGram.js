@@ -10,15 +10,30 @@ import { getProfileId } from "./data/provider.js"
 let profile = false
 let messageForm = false
 let directMessagePage = false
+
 export const GiffyGram = () => {
     // Show main main UI
-    if (profile === true ) {
+    if (profile && messageForm) {
         const chosenUser = getProfileId()
-
+        return `
+        <nav class="navigation">${NavBar()}</nav>
+        <section class="directMessage">${MessageForm()}</section>
+        <section class="userProfile">${AuthorProfile(chosenUser)}</section>
+        <footer class="footer>Footer</footer>
+        `
+    } else if (profile) {
+        const chosenUser = getProfileId()
         return `
         <nav class="navigation">${NavBar()}</nav>
         <section class="empty"></section>
         <section class="userProfile">${AuthorProfile(chosenUser)}</section>
+        <footer class="footer>Footer</footer>
+        `
+    } else if (directMessagePage && messageForm) {
+        return `
+        <nav class="navigation">${NavBar()}</nav>
+        <section class="directMessage">${MessageForm()}</section>
+        <section class="giffygram__feed">${DirectMessages()}</section>
         <footer class="footer>Footer</footer>
         `
     } else if (directMessagePage === true) {
@@ -28,20 +43,19 @@ export const GiffyGram = () => {
         <section class="giffygram__feed">${DirectMessages()}</section>
         <footer class="footer>Footer</footer>
         `
-    } else if (messageForm === false) {
+    } else if (messageForm) {
         return `
         <nav class="navigation">${NavBar()}</nav>
-        <section class="empty"></section>
+        <section class="directMessage">${MessageForm()}</section>
         <section class="giffygram__feed">${PostList()}</section>
         <footer class="footer">${Footer()}</footer>
         `
     } else {
         return `
         <nav class="navigation">${NavBar()}</nav>
-        <section class="directMessage">${MessageForm()}</section>
+        <section class="empty"></section>
         <section class="giffygram__feed">${PostList()}</section>
         <footer class="footer">${Footer()}</footer>
-
         `
     }
 
